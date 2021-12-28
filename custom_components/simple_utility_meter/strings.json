@@ -1,0 +1,32 @@
+{
+  "title": "Simple Utility Meter",
+  "config": {
+    "step": {
+      "user": {
+        "title": "New Utility Meter",
+        "data": {
+          "name": "Entry name",
+          "type": "Utility type",
+          "unit": "Measurement Unit",
+          "value": "Current Meter value"
+        }
+      }
+    },
+    "error": {
+      "error": "Unknown error"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Update Utility Meter value",
+        "data": {
+          "value": "Current Meter value"
+        }
+      }
+    },
+    "error": {
+      "error": "Unknown error"
+    }
+  }
+}

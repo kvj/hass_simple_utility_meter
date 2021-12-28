@@ -1,0 +1,12 @@
+{
+  "domain": "simple_utility_meter",
+  "name": "Simple Utility Meter",
+  "documentation": "https://github.com/kvj/hass_simple_utility_meter",
+  "issue_tracker": "https://github.com/kvj/hass_simple_utility_meter/issues",
+  "dependencies": [],
+  "codeowners": ["@kvj"],
+  "requirements": [],
+  "iot_class": "calculated",
+  "config_flow": true,
+  "version": "0.0.1"
+}

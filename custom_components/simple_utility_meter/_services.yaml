@@ -1,0 +1,12 @@
+update_value:
+  name: Record new utility meter value
+  target:
+    entity:
+      integration: simple_utility_meter
+  fields:
+    value:
+      name: New value
+      required: true
+      example: 50
+      selector:
+        number: {}

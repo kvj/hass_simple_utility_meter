@@ -1,0 +1,5 @@
+{
+    "name": "Simple Utility Meter",
+    "domains": ["sensor"],
+    "render_readme": true
+}
