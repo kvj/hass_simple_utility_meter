@@ -27,6 +27,14 @@ class UtilityMeter(BaseEntity, SensorEntity):
         self._attr_device_class = self.config.get("type")
 
     @property
+    def state_class(self):
+        return self.data.get("measure_type", "total")
+
+    @property
+    def device_class(self):
+        return self.data.get("type")
+
+    @property
     def native_unit_of_measurement(self):
         return self.config.get("unit")
 
@@ -51,4 +59,3 @@ class LastUpdate(BaseEntity, SensorEntity):
     @property
     def state(self):
         return datetime.fromtimestamp(self.data.get("last_update"))
-

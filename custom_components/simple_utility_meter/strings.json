@@ -8,7 +8,8 @@
           "name": "Entry name",
           "type": "Utility type",
           "unit": "Measurement Unit",
-          "value": "Current Meter value"
+          "value": "Current Meter value",
+          "measure_type": "Type of measurement"
         }
       }
     },
@@ -21,6 +22,8 @@
       "init": {
         "title": "Update Utility Meter value",
         "data": {
+          "type": "Utility type",
+          "measure_type": "Type of measurement",
           "value": "Current Meter value"
         }
       }
