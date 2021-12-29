@@ -1,8 +1,10 @@
 from homeassistant.components.sensor import SensorEntity
+from homeassistant.helpers import config_validation as cv, entity_platform
+import voluptuous as vol
 
 import logging
 
-from . import BaseEntity
+from . import BaseEntity, get_coordinator
 from .constants import DOMAIN
 
 from datetime import datetime
@@ -11,17 +13,24 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass, entry, async_add_entities):
     _LOGGER.debug("Setup sensor: %s", entry)
+    coordinator = get_coordinator(hass, entry)
     entities = []
-    entities.append(UtilityMeter(entry))
-    entities.append(LastUpdate(entry))
+    platform = entity_platform.async_get_current_platform()
+    entities.append(UtilityMeter(entry, coordinator))
+    entities.append(LastUpdate(entry, coordinator))
     async_add_entities(entities)
+    platform.async_register_entity_service(
+        "update_meter_value",
+        {vol.Required("value"): cv.positive_float},
+        "async_update_value",
+    )
     return True
 
 
 class UtilityMeter(BaseEntity, SensorEntity):
 
-    def __init__(self, entry):
-        super().__init__(entry)
+    def __init__(self, entry, coordinator):
+        super().__init__(entry, coordinator)
         self.set_ids("value", "")
         self._attr_state_class = "total_increasing"
         self._attr_device_class = self.config.get("type")
@@ -47,11 +56,17 @@ class UtilityMeter(BaseEntity, SensorEntity):
         _LOGGER.debug("UtilityMeter[%s] state: %s", self.name, self.data)
         return self.native_value
 
+    async def async_update_value(self, value):
+        await self.async_update_data(dict(
+            value=value,
+            last_update=datetime.now().timestamp(),
+        ))
+
 
 class LastUpdate(BaseEntity, SensorEntity):
 
-    def __init__(self, entry):
-        super().__init__(entry)
+    def __init__(self, entry, coordinator):
+        super().__init__(entry, coordinator)
         self.set_ids("last_update", "Last Update")
         self._attr_device_class = "timestamp"
         self._attr_entity_category = "diagnostic"

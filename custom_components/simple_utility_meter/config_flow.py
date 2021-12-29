@@ -20,6 +20,7 @@ def _gen_init_schema(data: dict):
     return vol.Schema({
         vol.Required("name", default=data.get("name")): cv.string,
         vol.Required("measure_type", default=data.get("measure_type")): vol.In(measure_type),
+        vol.Required("type", default=data.get("type")): vol.In(device_types),
         vol.Required("unit", default=data.get("unit")): vol.In(unit_types),
         vol.Required("value", default=data.get("value")): cv.positive_float,
     })
