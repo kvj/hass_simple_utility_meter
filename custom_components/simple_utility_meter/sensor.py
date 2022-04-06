@@ -1,5 +1,6 @@
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers import config_validation as cv, entity_platform
+from homeassistant.helpers.entity import EntityCategory
 import voluptuous as vol
 
 import logging
@@ -69,7 +70,7 @@ class LastUpdate(BaseEntity, SensorEntity):
         super().__init__(entry, coordinator)
         self.set_ids("last_update", "Last Update")
         self._attr_device_class = "timestamp"
-        self._attr_entity_category = "diagnostic"
+        self._attr_entity_category = EntityCategory.DIAGNOSTIC
 
     @property
     def state(self):
