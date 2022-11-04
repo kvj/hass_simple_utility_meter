@@ -13,7 +13,7 @@ def _validate(user_input):
     return errors
 
 unit_types = {"kWh": "kWh", "m³": "m³", "ft³": "ft³", "l": "l"}
-device_types = {None: "None", "energy": "Energy", "gas": "Gas"}
+device_types = {None: "None", "energy": "Energy", "gas": "Gas", "water": "Water"}
 measure_type = {"total": "Always total value", "total_increasing": "Total value (with reset)"}
 
 def _gen_init_schema(data: dict):
